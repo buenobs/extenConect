@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conector Notion — Opções</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    main { max-width: 680px; margin: 0 auto; padding: 32px 16px 64px; }
+    h1 { font-size: 22px; margin: 0; }
+    h2 { font-size: 15px; margin: 32px 0 8px; }
+    section { border-top: 1px solid var(--line); padding-top: 4px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin: 14px 0; }
+    .field > span { font-weight: 600; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .row input { flex: 1; }
+    ol { padding-left: 20px; margin: 8px 0; }
+    li { margin: 4px 0; }
+    #sites { list-style: none; padding: 0; }
+    #sites li { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  </style>
+</head>
+<body>
+<main>
+  <header class="brand"><span class="logo">N</span><h1>Conector Notion para IAs</h1></header>
+
+  <h2>1. Crie a integração no Notion</h2>
+  <section>
+    <ol>
+      <li>Abra <a href="https://www.notion.so/profile/integrations" target="_blank" rel="noopener">notion.so/profile/integrations</a> e crie uma integração <strong>interna</strong>.</li>
+      <li>Em <em>Capacidades</em>, marque ler, atualizar e inserir conteúdo.</li>
+      <li>Copie o <em>token de integração interna</em> (começa com <code>ntn_</code>) e cole abaixo.</li>
+      <li>Em cada página ou banco que a IA pode usar: menu <strong>•••</strong> › <strong>Conexões</strong> › adicione a integração. Subpáginas herdam o acesso.</li>
+    </ol>
+  </section>
+
+  <h2>2. Configuração</h2>
+  <section>
+    <label class="field">
+      <span>Token da integração</span>
+      <div class="row">
+        <input type="password" id="token" placeholder="ntn_…" autocomplete="off" spellcheck="false">
+        <button id="test">Testar</button>
+      </div>
+      <small id="testResult" class="muted">Fica guardado só neste navegador (chrome.storage.local).</small>
+    </label>
+    <label class="field">
+      <span>Destino padrão para novas páginas <small class="muted">(opcional)</small></span>
+      <input type="text" id="defaultParentId" placeholder="URL ou ID de uma página ou banco de dados">
+    </label>
+    <label class="field">
+      <span>Tamanho máximo do texto enviado à IA (caracteres)</span>
+      <input type="number" id="maxChars" min="1000" step="1000">
+    </label>
+    <label class="check"><input type="checkbox" id="autoRunReads"> Executar comandos de leitura da IA automaticamente</label>
+    <label class="check"><input type="checkbox" id="autoSend"> Enviar o resultado à IA automaticamente</label>
+    <p class="muted small">Comandos que criam ou alteram páginas sempre pedem sua confirmação.</p>
+    <div class="row"><button id="save" class="primary">Salvar</button><span id="saved" class="ok" hidden>Salvo ✓</span></div>
+  </section>
+
+  <h2>3. Outros sites de IA</h2>
+  <section>
+    <p class="muted">ChatGPT, Claude, Gemini, AI Studio, DeepSeek, Perplexity, Copilot, Grok, Mistral, Qwen, Meta AI, Poe e HuggingChat já vêm ativados.
+      Em qualquer outro site, use o botão da extensão › <em>Abrir painel nesta aba</em>, ou ative-o aqui para que o painel carregue sempre.</p>
+    <div class="row">
+      <input type="text" id="siteInput" placeholder="ex.: chat.exemplo.com">
+      <button id="addSite">Ativar</button>
+    </div>
+    <p id="siteError" class="error small" hidden></p>
+    <ul id="sites"></ul>
+  </section>
+</main>
+<script type="module" src="options.js"></script>
+</body>
+</html>

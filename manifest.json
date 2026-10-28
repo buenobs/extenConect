@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Conector Notion para IAs",
+  "version": "0.1.0",
+  "description": "Deixa qualquer IA no navegador (ChatGPT, Claude, Gemini, DeepSeek…) buscar, ler e escrever no seu Notion.",
+  "permissions": ["storage", "scripting", "activeTab"],
+  "host_permissions": ["https://api.notion.com/*"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Conector Notion",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "options/options.html",
+  "commands": {
+    "toggle-panel": {
+      "suggested_key": { "default": "Ctrl+Shift+Y", "mac": "Command+Shift+Y" },
+      "description": "Abrir/fechar o painel do Notion na aba atual"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://aistudio.google.com/*",
+        "https://chat.deepseek.com/*",
+        "https://www.perplexity.ai/*",
+        "https://copilot.microsoft.com/*",
+        "https://grok.com/*",
+        "https://chat.mistral.ai/*",
+        "https://chat.qwen.ai/*",
+        "https://www.meta.ai/*",
+        "https://poe.com/*",
+        "https://huggingface.co/chat/*"
+      ],
+      "js": ["src/content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

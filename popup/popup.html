@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Conector Notion</title>
+  <link rel="stylesheet" href="../options/shared.css">
+  <style>
+    body { width: 300px; padding: 14px; }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+    .actions button { width: 100%; }
+  </style>
+</head>
+<body>
+  <header class="brand"><span class="logo">N</span><strong>Conector Notion</strong></header>
+  <p id="status" class="muted">Verificando conexão…</p>
+  <div class="actions">
+    <button id="open" class="primary">Abrir painel nesta aba</button>
+    <button id="options">Opções</button>
+  </div>
+  <label class="check"><input type="checkbox" id="autoRunReads"> Executar leituras automaticamente</label>
+  <label class="check"><input type="checkbox" id="autoSend"> Enviar o resultado à IA automaticamente</label>
+  <p id="error" class="error" hidden></p>
+  <p class="muted small">Atalho: Ctrl+Shift+Y</p>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
